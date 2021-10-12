@@ -4,9 +4,17 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Repositories\TariffRepositoryInterface;
 
 class TariffController extends Controller
 {
+
+    protected $tariffRepository;
+    public function __construct(TariffRepositoryInterface $tariffRepository)
+    {
+        $this->tariffRepository = $tariffRepository;
+    }
+
     /**
      * Calculate Tariff.
      *
@@ -14,6 +22,7 @@ class TariffController extends Controller
      */
     public function calculateTariff(Request $request)
     {
+        return $this->tariffRepository->calCulateBasicElectricityTariff($request);
 
         try {
             
