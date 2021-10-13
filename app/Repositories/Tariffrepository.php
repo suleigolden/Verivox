@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Tariff;
 
 
 class Tariffrepository implements TariffRepositoryInterface
@@ -42,7 +43,8 @@ class Tariffrepository implements TariffRepositoryInterface
             $consumption_costs = 0.22; //KWH
             $months = 12;
             $annualTariff = ($baseCostsPerMonth*$months) + ($baseCostsYearly*$consumption_costs);
-            return response()->json(['status' => 200, "result" => $annualTariff]);
+            $this->storeTariff($request,$packageTariff);
+            return response()->json(['status' => 200, "result" => $annualTariff, "data" => $this->all()]);
     }
     public function calCulatePackagedTariff($request)
     {
@@ -57,12 +59,20 @@ class Tariffrepository implements TariffRepositoryInterface
          }else{
             $packageTariff = $baseFee + ($baseCostsYearly-4000) * $baseCostsPerKWH;
          }
-        
-        return response()->json(['status' => 200, "result" => $packageTariff]);
+        $this->storeTariff($request,$packageTariff);
+        return response()->json(['status' => 200, "result" => $packageTariff, "data" => $this->all()]);
+    }
+    public function storeTariff($request,$annual_tariff)
+    {
+        $tariff = new Tariff();
+        $tariff->name = $request->name;
+        $tariff->tariff_cost = $annual_tariff;
+        $tariff->save();
+        return true;
     }
     public function all()
-    {
-        return 777;
+    { 
+        return Tariff::orderBy("tariff_cost", "ASC")->get();
     }
 
     
