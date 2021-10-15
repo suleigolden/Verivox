@@ -18,17 +18,13 @@ export default class Home extends Component {
   };
 
   onSubmitToEmpHandler = (e) => {
-    console.log(this.state.sendData);
     this.setState({ isLoadingToSend: true });
     axios
       .post(API_BASE_URL+`api/calculate/tariff`,this.state.sendData)
       .then((response) => {
         this.setState({ isLoadingToSend: false });
-        
-        console.log('..: '+response.data.result);
         if (response.data.status === 200) {
-            
-            console.log('OK.....');
+            this.setState({ data: response.data.data });
         }
 
         if (response.data.status !== 200) {
