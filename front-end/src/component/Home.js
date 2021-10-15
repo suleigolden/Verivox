@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import {
   Redirect,
 } from "react-router-dom";
+import axios from 'axios';
+import { API_BASE_URL } from './config';
 
 export default class Home extends Component {
   constructor(props) {
@@ -11,6 +13,7 @@ export default class Home extends Component {
       yearlyConsumption: ''
     }
   };
+
   handletariffNameChange(e) {
     this.setState({
       tariffName: e.target.value
