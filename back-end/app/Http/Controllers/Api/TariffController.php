@@ -23,12 +23,12 @@ class TariffController extends Controller
     public function calculateTariff(Request $request)
     {
         
-        // try {
+        try {
                 return $this->tariffRepository->calculateTariff($request);
             
-        // } catch (\Throwable $th) {
-        //     return response()->json(['status' => 500, "result" => 'error please try again...']);
-        // }
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 500, "result" => 'error please try again...']);
+        }
 
     }
      /**

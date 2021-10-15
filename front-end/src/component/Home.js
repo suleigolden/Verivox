@@ -103,6 +103,7 @@ handleChange = (e) => {
                      </div>
                        
                   </div>
+                  <h4 className="text-success">{this.state.feedbackMessage}</h4>
               </form>
               <br/><br/><br/>
              <h1>Tariff History</h1>
@@ -115,8 +116,8 @@ handleChange = (e) => {
                 </thead>
                 <tbody>
                 {
-                    this.state.data.map(rec => 
-                        <tr>
+                    this.state.data.map((rec,i) => 
+                        <tr key={i}>
                             <td>{rec.name}</td>
                             <td><b>€{rec.tariff_cost.toLocaleString(navigator.language, { minimumFractionDigits: 0 })}</b></td>
                       </tr>
