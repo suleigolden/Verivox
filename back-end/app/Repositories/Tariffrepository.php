@@ -21,7 +21,7 @@ class Tariffrepository implements TariffRepositoryInterface
 
     public function calculateTariff($request)
     {
-        switch ($request->name) {
+        switch ($request->tariffName) {
             case 'BasicElectricityTariff':
                     return $this->calCulateBasicElectricityTariff($request);
                 break;
@@ -31,7 +31,7 @@ class Tariffrepository implements TariffRepositoryInterface
                 break;
             
             default:
-                    return response()->json(['status' => 500, "result" => 'error please select a product']);
+                    return response()->json(['status' => 500, "result" => 'error please select a product:']);
                 break;
         }
     }
@@ -43,7 +43,7 @@ class Tariffrepository implements TariffRepositoryInterface
             $consumption_costs = 0.22; //KWH
             $months = 12;
             $annualTariff = ($baseCostsPerMonth*$months) + ($baseCostsYearly*$consumption_costs);
-            $this->storeTariff($request,$packageTariff);
+            $this->storeTariff($request,$annualTariff);
             return response()->json(['status' => 200, "result" => $annualTariff, "data" => $this->all()]);
     }
     public function calCulatePackagedTariff($request)
@@ -65,14 +65,19 @@ class Tariffrepository implements TariffRepositoryInterface
     public function storeTariff($request,$annual_tariff)
     {
         $tariff = new Tariff();
-        $tariff->name = $request->name;
+        $tariff->name = $request->tariffName;
         $tariff->tariff_cost = $annual_tariff;
         $tariff->save();
         return true;
     }
+    public function getTariff()
+    {   
+        return response()->json(['status' => 200, "data" => $this->all()]);
+    }
     public function all()
     { 
         return Tariff::orderBy("tariff_cost", "ASC")->get();
+        
     }
 
     

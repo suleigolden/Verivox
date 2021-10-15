@@ -20,5 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::namespace('App\Http\Controllers\Api')->group(function () {
+    Route::get('get/tariff', 'TariffController@getTariff');
     Route::post('calculate/tariff', 'TariffController@calculateTariff');
 });
