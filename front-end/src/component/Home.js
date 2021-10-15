@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import {
-  Redirect,
-} from "react-router-dom";
 import axios from 'axios';
 import { API_BASE_URL } from './config';
 
@@ -10,10 +7,22 @@ export default class Home extends Component {
     super(props);
     this.state = {
       tariffName: '',
-      yearlyConsumption: ''
+      yearlyConsumption: '',
+      data: [],
     }
   };
 
+fetchData = async () => {
+    const { data } = await axios.get(API_BASE_URL + `api/get/tariff`);
+    this.setState({ data: data.data });
+    console.log(data.data);
+};
+
+componentDidMount() {
+    this.fetchData();
+};
+
+  
   handletariffNameChange(e) {
     this.setState({
       tariffName: e.target.value
