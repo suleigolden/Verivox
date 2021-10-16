@@ -58,7 +58,7 @@ handleChange = (e) => {
         
            <div className="col-md-3"></div>
            <div className="col-md-6 box-shadow" align="center">
-             <h1>Verivox Task</h1>
+             <h1>Verivox Task (Tariff Comparison)</h1>
               <form action="#" id="actionForm">
                 <div className="row">
                     <div className="col-md-4">
