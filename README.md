@@ -37,11 +37,10 @@ Consumption = 6000 kWh/year => Annual costs = 1400 €/year (800€ + 2000 kWh *
 Notes
 Please implement this task in C#, C++ or Java or any other object oriented language. If you write tests for your implementation please provide them with your implementation. Please develop only the logic described above, and no UI (webpage, etc.). You do not need a data base. All sample data can be hardcoded or added to the implementation by any other method of your choice.
 
-## APi Rest Endpoints
+## APi  Endpoints
 
 - http://127.0.0.1:8000/get/tariff  //GET
 - http://127.0.0.1:8000/calculate/tariff     //POST tariffName, yearlyConsumption
-
 
 
 ## Running tests
